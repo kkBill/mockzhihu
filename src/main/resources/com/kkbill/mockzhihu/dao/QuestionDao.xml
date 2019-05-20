@@ -4,7 +4,7 @@
 <mapper namespace="com.kkbill.mockzhihu.dao.QuestionDao">
     <sql id="table">question</sql>
     <sql id="selectFields">id, title, content, user_id, created_date, comment_count</sql>
-    <select id="selectLatestQuestions" resultType="com.kkbill.mockzhihu.entities.Question">
+    <select id="selectLatestQuestions" resultType="com.kkbill.mockzhihu.model.Question">
         SELECT
         <include refid="selectFields"/>
 

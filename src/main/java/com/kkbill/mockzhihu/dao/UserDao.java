@@ -1,7 +1,7 @@
 package com.kkbill.mockzhihu.dao;
 
 
-import com.kkbill.mockzhihu.entities.User;
+import com.kkbill.mockzhihu.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 

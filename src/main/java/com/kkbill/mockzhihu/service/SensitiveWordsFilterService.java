@@ -55,7 +55,7 @@ public class SensitiveWordsFilterService implements InitializingBean {
      */
     private TireNode rootNode = new TireNode();
 
-    //判断字符ch是否是符号
+    //判断字符ch是否是符号，用于过滤特殊字符
     private boolean isSymbol(char ch) {
         int ic = (int) ch;
 
@@ -88,8 +88,8 @@ public class SensitiveWordsFilterService implements InitializingBean {
 
     //核心
     //对普通的文本进行敏感词的过滤
-    public String filter(String text){
-        if(StringUtils.isEmpty(text)){//空文本，直接返回
+    public String filter(String text) {
+        if (StringUtils.isEmpty(text)) {//空文本，直接返回
             return text;
         }
 
@@ -99,37 +99,35 @@ public class SensitiveWordsFilterService implements InitializingBean {
         int begin = 0;
         int position = 0; //用于与字典树的指针进行字符比较
 
-        while(position < text.length()){
+        while (position < text.length()) {
             char ch = text.charAt(position);
-            if(isSymbol(ch)){
-                if(tempNode==rootNode){
+            if (isSymbol(ch)) {
+                if (tempNode == rootNode) {
                     result.append(ch);
                     begin++;
                 }
                 position++;
                 continue;
             }
+
             tempNode = tempNode.getSubNode(ch);
-            // 当前位置的匹配结束，没有找到敏感词
-            if (tempNode == null) {
-                // 以begin开始的字符串不存在敏感词
+            if (tempNode == null) { //不存在以字符ch开始的敏感词
                 result.append(text.charAt(begin));
-                // 跳到下一个字符开始测试
                 position = begin + 1;
                 begin = position;
-                // 回到树初始节点
                 tempNode = rootNode;
-            } else if (tempNode.isEnd()) {
-                // 发现敏感词，从begin到position的位置用replacement替换掉
+            } else if (tempNode.isEnd()) { //发现敏感词
                 result.append(replaceWords);
-                position = position + 1;
-                begin = position;
+                begin = position + 1;
+                position = begin;
                 tempNode = rootNode;
             } else {
-                ++position;
+                position++;
             }
-
         }
+
+        //最后一部分记得加进去
+        result.append(text.substring(begin));
         return result.toString();
     }
 
@@ -137,19 +135,19 @@ public class SensitiveWordsFilterService implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
         rootNode = new TireNode();
-        try{
+        try {
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("SensitiveWords.txt");
             InputStreamReader reader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(reader);
             String line;
-            while ((line=bufferedReader.readLine()) !=null){
-                line=line.trim();//This method returns a copy of the string, with leading and trailing whitespace omitted.-->"  hello world  " =>"hello world"
+            while ((line = bufferedReader.readLine()) != null) {
+                line = line.trim();//This method returns a copy of the string, with leading and trailing whitespace omitted.-->"  hello world  " =>"hello world"
                 addTireNode(line);
             }
             reader.close();
 
-        } catch (Exception e){
-            logger.error("读取敏感词文件失败"+e.getMessage());
+        } catch (Exception e) {
+            logger.error("读取敏感词文件失败" + e.getMessage());
         }
     }
 }

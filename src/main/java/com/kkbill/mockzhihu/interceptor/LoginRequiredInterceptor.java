@@ -1,6 +1,6 @@
 package com.kkbill.mockzhihu.interceptor;
 
-import com.kkbill.mockzhihu.entities.HostHolder;
+import com.kkbill.mockzhihu.model.HostHolder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

@@ -1,10 +1,8 @@
 package com.kkbill.mockzhihu.controller;
 
-import com.kkbill.mockzhihu.dao.QuestionDao;
-import com.kkbill.mockzhihu.entities.HostHolder;
-import com.kkbill.mockzhihu.entities.Question;
-import com.kkbill.mockzhihu.entities.User;
-import com.kkbill.mockzhihu.entities.ViewObject;
+import com.kkbill.mockzhihu.model.HostHolder;
+import com.kkbill.mockzhihu.model.Question;
+import com.kkbill.mockzhihu.model.ViewObject;
 import com.kkbill.mockzhihu.service.QuestionService;
 import com.kkbill.mockzhihu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;

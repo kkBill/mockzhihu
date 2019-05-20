@@ -3,8 +3,8 @@ package com.kkbill.mockzhihu;
 
 import com.kkbill.mockzhihu.dao.QuestionDao;
 import com.kkbill.mockzhihu.dao.UserDao;
-import com.kkbill.mockzhihu.entities.Question;
-import com.kkbill.mockzhihu.entities.User;
+import com.kkbill.mockzhihu.model.Question;
+import com.kkbill.mockzhihu.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

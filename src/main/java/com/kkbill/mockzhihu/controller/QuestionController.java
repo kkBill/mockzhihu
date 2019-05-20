@@ -2,6 +2,7 @@ package com.kkbill.mockzhihu.controller;
 
 import com.kkbill.mockzhihu.model.*;
 import com.kkbill.mockzhihu.service.CommentService;
+import com.kkbill.mockzhihu.service.LikeService;
 import com.kkbill.mockzhihu.service.QuestionService;
 import com.kkbill.mockzhihu.service.UserService;
 import com.kkbill.mockzhihu.util.MockZhihuUtil;
@@ -31,7 +32,11 @@ public class QuestionController {
     private UserService userService;
 
     @Autowired
+    private LikeService likeService;
+
+    @Autowired
     private HostHolder hostHolder;
+
 
     //展示单个问题
     @RequestMapping(value = "/question/{qid}", method = {RequestMethod.GET})
@@ -45,6 +50,12 @@ public class QuestionController {
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
             vo.setObject("comment", comment);//评论
+            if(hostHolder.getUser() == null){
+                vo.setObject("liked",0);
+            }else{
+                vo.setObject("liked", likeService.getLikeStatus(hostHolder.getUser().getId(),EntityType.ENTITY_COMMENT,comment.getId()));
+            }
+            vo.setObject("likeCount",likeService.getLikeCount(EntityType.ENTITY_COMMENT,comment.getId()));
             vo.setObject("user", userService.getUserById(comment.getUser_id()));//发表该评论的用户
             vos.add(vo);
         }

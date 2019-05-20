@@ -1,6 +1,6 @@
 package com.kkbill.mockzhihu.dao;
 
-import com.kkbill.mockzhihu.entities.LoginTicket;
+import com.kkbill.mockzhihu.model.LoginTicket;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

@@ -2,9 +2,9 @@ package com.kkbill.mockzhihu.interceptor;
 
 import com.kkbill.mockzhihu.dao.LoginTicketDao;
 import com.kkbill.mockzhihu.dao.UserDao;
-import com.kkbill.mockzhihu.entities.HostHolder;
-import com.kkbill.mockzhihu.entities.LoginTicket;
-import com.kkbill.mockzhihu.entities.User;
+import com.kkbill.mockzhihu.model.HostHolder;
+import com.kkbill.mockzhihu.model.LoginTicket;
+import com.kkbill.mockzhihu.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;

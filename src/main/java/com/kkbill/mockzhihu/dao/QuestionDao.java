@@ -1,6 +1,6 @@
 package com.kkbill.mockzhihu.dao;
 
-import com.kkbill.mockzhihu.entities.Question;
+import com.kkbill.mockzhihu.model.Question;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +14,7 @@ public interface QuestionDao {
     String SELECT_FIELDS = " id, " + TABLE_FIELDS;
 
     @Insert({"insert into ", TABLE_NAME, "(", TABLE_FIELDS, ") values(#{title}, #{content}, #{user_id}, #{created_date}, #{comment_count})"})
-    int addQuestion(Question question);
+    int addQuestion(Question question);//返回值代表什么意思？
 
     @Select({"select ", SELECT_FIELDS, " from ", TABLE_NAME, " Where id = #{id} "})
     Question getQuestionById(int id);
